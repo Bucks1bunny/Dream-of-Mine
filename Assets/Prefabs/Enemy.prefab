@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMesh: {fileID: 2779448038530856090}
-  player: {fileID: 0}
+  player: {fileID: 3087298358110416931, guid: ca7c404ded88b7643b4dc0e231a3500b, type: 3}
   Ground:
     serializedVersion: 2
     m_Bits: 64

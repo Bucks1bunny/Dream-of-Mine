@@ -38,6 +38,8 @@ public class Shoot : MonoBehaviour
     }
     public void Fire()
     {
+        ammo -= 1;
+
         RaycastHit hit;
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {
