@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -9,9 +7,10 @@ public class Shoot : MonoBehaviour
     private float nextFire = 0f;
     public int maxAmmo = 7;
     private int ammo;
+    private float range = 100f;
 
     public TextMeshProUGUI ammoText;
-    public GameObject bulletPrefab;
+    //public GameObject bulletPrefab;
     public Transform firePoint;
     public Camera playerCam;
 
@@ -39,12 +38,15 @@ public class Shoot : MonoBehaviour
     }
     public void Fire()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        bulletGO.transform.forward = playerCam.transform.forward;
-
-        ammo -= 1;
-
-        Destroy(bulletGO, 2f);
+        RaycastHit hit;
+        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
+        {
+            Enemy enemy = hit.transform.GetComponent<Enemy>();
+            if(enemy != null)
+            {
+                enemy.TakeDamage(25);
+            }
+        }
     }
     public void Reload()
     {

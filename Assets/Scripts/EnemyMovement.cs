@@ -13,7 +13,9 @@ public class EnemyMovement : MonoBehaviour
     private float walkPointRange = 10f;
 
     //   Attacking
-    public float timeBetweenAttacks;
+    public float damage = 10f;
+    public float timeBetweenAttacks = 1f;
+    private float nextattack = 0f;
     bool alreadyAttacked;
     
     //   States
@@ -65,6 +67,19 @@ public class EnemyMovement : MonoBehaviour
         navMesh.SetDestination(transform.position);
 
         transform.LookAt(player);
+
+        if (!alreadyAttacked)
+        {
+            Player target = player.GetComponent<Player>();
+            target.TakeDamage(10);
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
     private void OnDrawGizmosSelected()
     {
