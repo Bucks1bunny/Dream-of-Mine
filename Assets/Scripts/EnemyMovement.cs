@@ -1,26 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
     public NavMeshAgent navMesh;
-
     public Transform player;
-
     public LayerMask Ground, Player;
-
+    
     //   Patroling
-    public Vector3 walkPoint;
+    private Vector3 walkPoint;
     bool walkPointSet;
     private float walkPointRange = 10f;
 
-    /*   Attacking
+    //   Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
-    */
-    //States
+    
+    //   States
     public float sightRange;
     public float attackRange;
     private bool playerInSightRange, playerInAttackRange;

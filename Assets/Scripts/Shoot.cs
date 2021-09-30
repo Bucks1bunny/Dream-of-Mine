@@ -41,7 +41,9 @@ public class Shoot : MonoBehaviour
     {
         GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         bulletGO.transform.forward = playerCam.transform.forward;
+
         ammo -= 1;
+
         Destroy(bulletGO, 2f);
     }
     public void Reload()
