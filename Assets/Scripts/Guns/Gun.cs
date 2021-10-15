@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class Shoot : MonoBehaviour
+public class Gun : MonoBehaviour
 {
     public float fireRate = 1f;
     private float nextFire = 0f;
@@ -9,26 +9,38 @@ public class Shoot : MonoBehaviour
     private int ammo;
     private float range = 300f;
 
-    public TextMeshProUGUI ammoText;
-    public ParticleSystem bulletEffect;
-    public Transform firePoint;
-    public Camera playerCam;
+    private TextMeshProUGUI ammoText;
+    private Camera playerCam;
+    private Transform firePoint;
 
+    public ParticleSystem bulletEffect;
+
+    public bool pistol, machineGun;
     private void Start()
     {
         ammo = maxAmmo;
+        ammoText = GameObject.Find("Ammo").GetComponent<TextMeshProUGUI>();
+        playerCam = GameObject.Find("Follow camera").GetComponent<Camera>();
+        firePoint = transform.Find("FirePoint");
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextFire)
+        // PISTOL
+        if (pistol && Input.GetKeyDown(KeyCode.Mouse0) && Time.time > nextFire)
         {
             if(ammo > 0)
             {
                 nextFire = Time.time + fireRate;
                 Fire();
-            } else 
+            }
+        }
+        // MACHINE GUN
+        if (machineGun && Input.GetKey(KeyCode.Mouse0) && Time.time > nextFire)
+        {
+            if (ammo > 0)
             {
-                Debug.Log("NOT AMMO");
+                nextFire = Time.time + fireRate;
+                Fire();
             }
         }
 
@@ -39,11 +51,11 @@ public class Shoot : MonoBehaviour
     public void Fire()
     {
         ammo -= 1;
-
+        //laser
         RaycastHit hit;
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
+            IDamageable enemy = hit.transform.GetComponent<IDamageable>();
             Instantiate(bulletEffect, firePoint.position, playerCam.transform.rotation);
             if(enemy != null)
             {

@@ -2,9 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour,IDamageable
 {
-    public List<GameObject> guns;
 
     public HealthBar healthBar;
     public float maxHealth = 100;
@@ -18,6 +17,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad1)) { }
     }
+    public void Heal(float healAmount)
+    {
+        currentHealth += healAmount;
+        healthBar.SetHealth(currentHealth);
+    }
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
@@ -26,13 +30,9 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
             Die();
     }
-    public void Heal(float healAmount)
-    {
-        currentHealth += healAmount;
-        healthBar.SetHealth(currentHealth);
-    }
     private void Die()
     {
         Debug.Log("YOU ARE DEAD");
     }
+
 }
