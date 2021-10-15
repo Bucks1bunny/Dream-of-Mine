@@ -7,10 +7,10 @@ public class Shoot : MonoBehaviour
     private float nextFire = 0f;
     public int maxAmmo = 7;
     private int ammo;
-    private float range = 100f;
+    private float range = 300f;
 
     public TextMeshProUGUI ammoText;
-    //public GameObject bulletPrefab;
+    public ParticleSystem bulletEffect;
     public Transform firePoint;
     public Camera playerCam;
 
@@ -44,6 +44,7 @@ public class Shoot : MonoBehaviour
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
         {
             Enemy enemy = hit.transform.GetComponent<Enemy>();
+            Instantiate(bulletEffect, firePoint.position, playerCam.transform.rotation);
             if(enemy != null)
             {
                 enemy.TakeDamage(25);

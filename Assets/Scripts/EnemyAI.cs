@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent navMesh;
     public Transform player;
@@ -14,8 +14,7 @@ public class EnemyMovement : MonoBehaviour
 
     //   Attacking
     public float damage = 10f;
-    public float timeBetweenAttacks = 1f;
-    private float nextattack = 0f;
+    public float timeBetweenAttacks = 3f;
     bool alreadyAttacked;
     
     //   States
@@ -35,7 +34,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) Chasing();
-        if (playerInSightRange && playerInAttackRange) Attacking();
+        if (playerInAttackRange) Attacking();
 
     }
     private void Patroling()
@@ -71,7 +70,8 @@ public class EnemyMovement : MonoBehaviour
         if (!alreadyAttacked)
         {
             Player target = player.GetComponent<Player>();
-            target.TakeDamage(10);
+            if(target != null)
+                target.TakeDamage(damage);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);

@@ -4,19 +4,20 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     //   Health
-    public Image healthBar;
-    public float health = 100;
-    private float enemyHealht;
+    public HealthBar healthBar;
+    public float maxHealth = 100;
+    private float currentEnemyHealht;
     void Start()
     {
-        enemyHealht = health;
+        currentEnemyHealht = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
     public void TakeDamage(float damage)
     {
-        enemyHealht -= damage;
-        healthBar.fillAmount = enemyHealht / health;
+        currentEnemyHealht -= damage;
+        healthBar.SetHealth(currentEnemyHealht);
 
-        if (enemyHealht <= 0)
+        if (currentEnemyHealht <= 0)
             Die();
     }
     private void Die()

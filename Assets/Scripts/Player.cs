@@ -1,22 +1,35 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    public Image healthBar;
-    public float health = 100;
-    private float enemyHealht;
+    public List<GameObject> guns;
+
+    public HealthBar healthBar;
+    public float maxHealth = 100;
+    public static float currentHealth;
     void Start()
     {
-        enemyHealht = health;
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1)) { }
     }
     public void TakeDamage(float damage)
     {
-        enemyHealht -= damage;
-        healthBar.fillAmount = enemyHealht / health;
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
 
-        if (enemyHealht <= 0)
+        if (currentHealth <= 0)
             Die();
+    }
+    public void Heal(float healAmount)
+    {
+        currentHealth += healAmount;
+        healthBar.SetHealth(currentHealth);
     }
     private void Die()
     {
