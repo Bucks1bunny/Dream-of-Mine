@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision col)
     {
-        IDamageable enemy = col.transform.GetComponent<IDamageable>();
+        IDamageable enemy = col.gameObject.GetComponent<IDamageable>();
         if (enemy != null)
         {
             enemy.TakeDamage(25);
