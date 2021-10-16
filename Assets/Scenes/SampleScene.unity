@@ -580,7 +580,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613038227}
   m_LocalRotation: {x: -0, y: -0.9999842, z: -0, w: -0.0056312624}
-  m_LocalPosition: {x: 5.28, y: 1.5508, z: 0.04}
+  m_LocalPosition: {x: 0.78, y: 1.5508, z: -2.66}
   m_LocalScale: {x: 1.2000006, y: 1.2, z: 1.2000006}
   m_Children:
   - {fileID: 1101081409}
@@ -624,7 +624,6 @@ MonoBehaviour:
   rb: {fileID: 613038231}
   coll: {fileID: 613038232}
   dropForce: 5
-  pickupRange: 42
   equipped: 0
 --- !u!54 &613038231
 Rigidbody:
@@ -691,7 +690,6 @@ MonoBehaviour:
   rb: {fileID: 627086667}
   coll: {fileID: 627086665}
   dropForce: 5
-  pickupRange: 2
   equipped: 1
 --- !u!65 &627086665
 BoxCollider:

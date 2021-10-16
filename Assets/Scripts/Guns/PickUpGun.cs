@@ -10,12 +10,13 @@ public class PickUpGun : MonoBehaviour
     public BoxCollider coll;
     [SerializeField]
     private float dropForce = 5f;
-    [SerializeField]
-    private float pickupRange = 4f;
+    private float pickupRange = 3f;
     [SerializeField]
     private bool equipped;
+    public static bool slotIsFull;
     private void Start()
     {
+        slotIsFull = true;
         gunContainer = GameObject.Find("GunContainer").GetComponent<Transform>();
         player = GameObject.Find("Player").GetComponent<Transform>();
         fpsCamera = GameObject.Find("Follow camera").GetComponent<Transform>();
@@ -37,8 +38,11 @@ public class PickUpGun : MonoBehaviour
     {
         Vector3 distanceToPlayer = player.position - transform.position;
 
-        if (!equipped && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E))
+        if (!equipped && !slotIsFull && distanceToPlayer.magnitude <= pickupRange && Input.GetKeyDown(KeyCode.E))
+        {
+
             Pickup();
+        }
 
         if (equipped && Input.GetKeyDown(KeyCode.G))
             Drop();
@@ -46,6 +50,7 @@ public class PickUpGun : MonoBehaviour
     private void Pickup()
     {
         equipped = true;
+        slotIsFull = true;
 
         rb.isKinematic = true;
         coll.isTrigger = true;
@@ -54,11 +59,12 @@ public class PickUpGun : MonoBehaviour
         transform.SetParent(gunContainer);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = new Vector3(.5f,.5f,.5f);
+        transform.localScale = Vector3.one;
     }
     private void Drop()
     {
         equipped = false;
+        slotIsFull = false;
 
         rb.isKinematic = false;
         coll.isTrigger = false;
