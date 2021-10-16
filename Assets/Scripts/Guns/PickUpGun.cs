@@ -8,11 +8,12 @@ public class PickUpGun : MonoBehaviour
     private Transform gunContainer, player, fpsCamera;
     public Rigidbody rb;
     public BoxCollider coll;
-
+    [SerializeField]
     private float dropForce = 5f;
+    [SerializeField]
     private float pickupRange = 4f;
-
-    public bool equipped;
+    [SerializeField]
+    private bool equipped;
     private void Start()
     {
         gunContainer = GameObject.Find("GunContainer").GetComponent<Transform>();
@@ -53,7 +54,7 @@ public class PickUpGun : MonoBehaviour
         transform.SetParent(gunContainer);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(.5f,.5f,.5f);
     }
     private void Drop()
     {

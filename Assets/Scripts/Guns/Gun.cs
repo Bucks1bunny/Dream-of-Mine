@@ -13,9 +13,11 @@ public class Gun : MonoBehaviour
     private Camera playerCam;
     private Transform firePoint;
 
-    public ParticleSystem bulletEffect;
+    public GameObject bulletPrefab;
+    public ParticleSystem laserEffect;
 
     public bool pistol, machineGun;
+    public bool usesLaser;
     private void Start()
     {
         ammo = maxAmmo;
@@ -52,16 +54,27 @@ public class Gun : MonoBehaviour
     {
         ammo -= 1;
         //laser
-        RaycastHit hit;
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
+        if (usesLaser) 
         {
-            IDamageable enemy = hit.transform.GetComponent<IDamageable>();
-            Instantiate(bulletEffect, firePoint.position, playerCam.transform.rotation);
-            if(enemy != null)
+            RaycastHit hit;
+            if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out hit, range))
             {
-                enemy.TakeDamage(25);
+                ParticleSystem laser = Instantiate(laserEffect, firePoint.position, playerCam.transform.rotation);
+                Destroy(laser, 2f);
+
+                IDamageable enemy = hit.transform.GetComponent<IDamageable>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(25);
+                }
             }
         }
+        else
+        {
+            GameObject bullet = Instantiate(bulletPrefab,firePoint.position,Quaternion.identity);
+            Destroy(bullet, 2f);
+        }
+        
     }
     public void Reload()
     {
