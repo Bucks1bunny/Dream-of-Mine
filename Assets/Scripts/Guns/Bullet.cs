@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour
             enemy.TakeDamage(25);
             Destroy(gameObject);
         }
+        if(col.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
     void Update()
     {
