@@ -63,6 +63,7 @@ public class DoorCode : MonoBehaviour
         if (textCode.text.Equals(rightCode))
         {
             Button_Back();
+            Cursor.visible = false;
             Destroy(door);
         }
         else
