@@ -16,42 +16,15 @@ public class DoorCode : MonoBehaviour
         code = string.Empty;
         textCode.text = code;
     }
-    public void Button_1()
-    {
-        textCode.text += "1";
-    }
-    public void Button_2()
-    {
-        textCode.text += "2";
-    }
-    public void Button_3()
-    {
-        textCode.text += "3";
-    }
-    public void Button_4()
-    {
-        textCode.text += "4";
-    }
-    public void Button_5()
-    {
-        textCode.text += "5";
-    }
-    public void Button_6()
-    {
-        textCode.text += "6";
-    }
-    public void Button_7()
-    {
-        textCode.text += "7";
-    }
-    public void Button_8()
-    {
-        textCode.text += "8";
-    }
-    public void Button_9()
-    {
-        textCode.text += "9";
-    }
+    public void Button_1() { textCode.text += "1"; }
+    public void Button_2() { textCode.text += "2"; }
+    public void Button_3() { textCode.text += "3"; }
+    public void Button_4() { textCode.text += "4"; }
+    public void Button_5() { textCode.text += "5"; }
+    public void Button_6() { textCode.text += "6"; }
+    public void Button_7() { textCode.text += "7"; }
+    public void Button_8() { textCode.text += "8"; }
+    public void Button_9() { textCode.text += "9"; }
     public void Button_Back() 
     {
         Time.timeScale = 1;
