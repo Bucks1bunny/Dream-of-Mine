@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Player : MonoBehaviour//,IDamageable
+public class Player : MonoBehaviour,IDamageable
 {
     [SerializeField] private Transform objectContainer;
     Camera cam;
     Ray ray;
     RaycastHit hit;
+
+    public HealthBar healthBar;
+    public float maxHealth = 100;
+    public static float currentHealth;
 
     private bool isCarry = false;
     private int rangeToObject = 2;
@@ -44,15 +48,8 @@ public class Player : MonoBehaviour//,IDamageable
         hit.rigidbody.isKinematic = true;
         hit.collider.transform.position = objectContainer.position;
     }
-    /*public UnityEvent OnBoxInteract;
-    private void BoxInteract()
-    {
-        OnBoxInteract?.Invoke();
-    }*/
 
-    public HealthBar healthBar;
-    public float maxHealth = 100;
-    public static float currentHealth;
+    
     public void Heal(float healAmount)
     {
         currentHealth += healAmount;
