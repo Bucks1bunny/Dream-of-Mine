@@ -2,22 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CodeOpener : MonoBehaviour
+public class CodeOpener : MonoBehaviour, IInteractable
 {
     public GameObject ui;
     public Transform player;
 
-    private float pressRange = 2f;
-    private void OnMouseDown()
+    public void Interact()
     {
-        Vector3 distanceToPlayer = player.position - transform.position;
-
-        if (distanceToPlayer.magnitude <= pressRange)
-        {
-            Time.timeScale = 0;
-            ui.SetActive(true);
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
+        ui.SetActive(true);
+        Time.timeScale = 0;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

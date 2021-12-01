@@ -1,6 +1,6 @@
 using TMPro;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DoorCode : MonoBehaviour
 {
@@ -12,10 +12,10 @@ public class DoorCode : MonoBehaviour
     public GameObject door;
     private void Start()
     {
-        ui.SetActive(false);
         code = string.Empty;
         textCode.text = code;
     }
+    #region Buttons
     public void Button_1() { textCode.text += "1"; }
     public void Button_2() { textCode.text += "2"; }
     public void Button_3() { textCode.text += "3"; }
@@ -25,10 +25,13 @@ public class DoorCode : MonoBehaviour
     public void Button_7() { textCode.text += "7"; }
     public void Button_8() { textCode.text += "8"; }
     public void Button_9() { textCode.text += "9"; }
+    #endregion
     public void Button_Back() 
     {
         Time.timeScale = 1;
-        ui.SetActive(false); 
+        ui.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void Button_Reset() { textCode.text = string.Empty; }
     public void Button_Submit()
@@ -36,13 +39,25 @@ public class DoorCode : MonoBehaviour
         if (textCode.text.Equals(rightCode))
         {
             Button_Back();
-            Cursor.visible = false;
             Destroy(door);
         }
         else
         {
-            Debug.Log("ERROR");
-            Button_Reset();
+            StartCoroutine(ErrorPopup());
         }
+    }
+    IEnumerator ErrorPopup()
+    {
+        textCode.text = "ERROR";
+        yield return new WaitForSecondsRealtime(.5f);
+        Button_Reset();
+        yield return new WaitForSecondsRealtime(.3f);
+        textCode.text = "ERROR";
+        yield return new WaitForSecondsRealtime(.5f);
+        Button_Reset();
+        yield return new WaitForSecondsRealtime(.3f);
+        textCode.text = "ERROR";
+        yield return new WaitForSecondsRealtime(.5f);
+        Button_Reset();
     }
 }

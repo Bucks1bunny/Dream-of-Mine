@@ -2,12 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ButtonOrder : MonoBehaviour
+public class ButtonOrder : MonoBehaviour,IInteractable
 {
-    //Raycast
-    Camera cam;
-    Ray ray;
-    RaycastHit hit;
 
     public static int id;
 
@@ -15,18 +11,10 @@ public class ButtonOrder : MonoBehaviour
 
     [SerializeField] private int pressRange;
 
-    private void Start()
-    {
-        cam = Camera.main;
-    }
     public UnityEvent OnButtonPressed;
-    public void ButtonPress()
+    public void Interact()
     {
-        ray = cam.ScreenPointToRay(Input.mousePosition);
-        if ((Physics.Raycast(ray, out hit, pressRange)))
-        {
-            OnButtonPressed?.Invoke();
-        }
+        OnButtonPressed?.Invoke();
     }
     public static int SetID()
     {

@@ -12,10 +12,12 @@ public class Player : MonoBehaviour,IDamageable
     public float maxHealth = 100;
     public static float currentHealth;
 
+    private bool b;
     private bool isCarry = false;
     private int rangeToObject = 2;
     private void Start()
     {
+        b = false;
         cam = Camera.main;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
@@ -26,17 +28,14 @@ public class Player : MonoBehaviour,IDamageable
         ray = cam.ScreenPointToRay(Input.mousePosition);
         if(Physics.Raycast(ray,out hit, rangeToObject))
         {
-            if(hit.collider.CompareTag("Button") && Input.GetKeyDown(KeyCode.E)) PressButton();
-
-            if (hit.collider.CompareTag("Object") && Input.GetKeyDown(KeyCode.E))
-            {
-                isCarry = !isCarry;
-            }
+            GameObject hitObject = hit.transform.gameObject;
+            if (Input.GetKeyDown(KeyCode.E))
+                hitObject.GetComponent<IInteractable>().Interact();
         }
         //carring objects
+
         if (isCarry)
             CarryObjects();
-        else hit.rigidbody.isKinematic = false;
     }
     public UnityEvent PlayerPress;
     private void PressButton()
@@ -45,10 +44,9 @@ public class Player : MonoBehaviour,IDamageable
     }
     private void CarryObjects()
     {
-        hit.rigidbody.isKinematic = true;
+        hit.rigidbody.isKinematic = !b;
         hit.collider.transform.position = objectContainer.position;
     }
-
     
     public void Heal(float healAmount)
     {
