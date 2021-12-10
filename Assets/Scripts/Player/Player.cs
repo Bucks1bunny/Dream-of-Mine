@@ -14,7 +14,7 @@ public class Player : MonoBehaviour,IDamageable
 
     private bool b;
     private bool isCarry = false;
-    private int rangeToObject = 2;
+    private int rangeToObject = 3;
     private void Start()
     {
         b = false;
@@ -30,7 +30,10 @@ public class Player : MonoBehaviour,IDamageable
         {
             GameObject hitObject = hit.transform.gameObject;
             if (Input.GetKeyDown(KeyCode.E))
+            {
+                Debug.Log(hitObject.name);
                 hitObject.GetComponent<IInteractable>().Interact();
+            }
         }
         //carring objects
 

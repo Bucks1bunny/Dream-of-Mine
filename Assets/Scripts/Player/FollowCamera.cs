@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public float sensitivity = 100f;
+    public float sensitivityX;
+    public float sensitivityY;
 
     public Transform player;
 
@@ -15,13 +16,14 @@ public class FollowCamera : MonoBehaviour
     }
     private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivity*10 * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivity*10 * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * sensitivityX*10 * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY*10 * Time.deltaTime;
 
         rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        rotationX = Mathf.Clamp(rotationX, -50f, 50f);
 
-        transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        transform.localEulerAngles = new Vector3(rotationX, 0f, 0f);
+
         player.Rotate(Vector3.up, mouseX);
     }
 }
