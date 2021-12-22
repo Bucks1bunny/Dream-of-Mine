@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpening : MonoBehaviour, IInteractable
+public class DoorOpening : Interactable
 {
     private Animator anim;
-    [SerializeField] private bool isClosed = true;
+    private bool isClosed;
+
     void Start()
     {
+        isClosed = true;
         anim = GetComponentInParent<Animator>();
     }
-
-    public void Interact()
+    /*
+    public override string ShowHand()
     {
-        isClosed = !isClosed;
-        anim.SetBool("Closed", isClosed);
-        anim.enabled = true;
+        return "Press [E] to open door";
     }
+    */
+    public override void Interact()
+    {
+        anim.enabled = true;
+        anim.SetBool("Closed", isClosed);
+        isClosed = !isClosed;
+    }
+
 }

@@ -8,11 +8,13 @@ public class FollowCamera : MonoBehaviour
     public float sensitivityY;
 
     public Transform player;
+    private Camera cam;
 
     private float rotationX;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        cam = GetComponent<Camera>();
     }
     private void Update()
     {
@@ -20,10 +22,15 @@ public class FollowCamera : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * sensitivityY*10 * Time.deltaTime;
 
         rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -50f, 50f);
+        rotationX = Mathf.Clamp(rotationX, -70f, 70f);
 
         transform.localEulerAngles = new Vector3(rotationX, 0f, 0f);
 
         player.Rotate(Vector3.up, mouseX);
+        //Zooming
+        if (Input.mouseScrollDelta.y > 0)
+            cam.fieldOfView -= 3;
+        if (Input.mouseScrollDelta.y < 0)
+            cam.fieldOfView += 3;
     }
 }

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ButtonOrder : MonoBehaviour,IInteractable
+public class ButtonOrder : Interactable
 {
 
     public static int id;
@@ -12,7 +12,13 @@ public class ButtonOrder : MonoBehaviour,IInteractable
     [SerializeField] private int pressRange;
 
     public UnityEvent OnButtonPressed;
-    public void Interact()
+    /*
+    public override string ShowHand()
+    {
+        return "Press [<color=red>E</color>]";
+    }
+    */
+    public override void Interact()
     {
         OnButtonPressed?.Invoke();
     }

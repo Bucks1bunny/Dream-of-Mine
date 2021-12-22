@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour,IInteractable  
+public class Button : Interactable  
 {
-    public GameObject door;
-
-    public void Interact()
+    public Rigidbody Cube;
+    /*
+    public override string ShowHand()
     {
-        Destroy(door);
+        return "Press [<color=red>E</color>]";
+    }
+    */
+    public override void Interact()
+    {
+        Cube.useGravity = true;
     }
 }

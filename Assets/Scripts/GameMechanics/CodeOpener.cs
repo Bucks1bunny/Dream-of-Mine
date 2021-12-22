@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CodeOpener : MonoBehaviour, IInteractable
+public class CodeOpener : Interactable
 {
     public GameObject ui;
     public Transform player;
-
-    public void Interact()
+    /*
+    public override string ShowHand()
+    {
+        return "Press [<color=red>E</color>] to open keyCode.";
+    }
+    */
+    public override void Interact()
     {
         ui.SetActive(true);
         Time.timeScale = 0;

@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: a654955173c3db04a83a5c7adf1122af
+  - enabled: 1
+    path: Assets/Scenes/FantasticWorld.unity
+    guid: 3a42f72edb8bd614f98844cca04ba68b
   m_configObjects: {}
