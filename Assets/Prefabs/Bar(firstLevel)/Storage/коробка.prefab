@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6671612946311887707}
   - component: {fileID: 355215179525015509}
   m_Layer: 0
-  m_Name: "\u043A\u043E\u0440\u043E\u0431\u043A\u0430.005"
+  m_Name: "\u043A\u043E\u0440\u043E\u0431\u043A\u0430"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1270250706386539408
 Transform:
