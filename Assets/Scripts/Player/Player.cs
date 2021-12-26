@@ -55,9 +55,12 @@ public class Player : MonoBehaviour, IDamageable
                 }
                 break;
             case Interactable.InteractionType.Hold:
-                if (Input.GetKey(key))
+                if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    interaction.IncreaseHoldTime();
+                    interactHand.enabled = false;
+                    interaction.Interact();
+                }
+                    /*interaction.IncreaseHoldTime();
                     if (interaction.GetHoldTime() > 1f)
                     {
                         interaction.Interact();
@@ -66,7 +69,7 @@ public class Player : MonoBehaviour, IDamageable
                 }
                 else
                     interaction.ResetHoldTime();
-                holdTimer.fillAmount = interaction.GetHoldTime();
+                holdTimer.fillAmount = interaction.GetHoldTime();*/
                 break;
             default:
                 throw new System.Exception("Not Interactable"); 
