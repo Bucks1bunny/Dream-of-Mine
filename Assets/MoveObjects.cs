@@ -11,7 +11,6 @@ public class MoveObjects : Interactable
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        target = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z));
     }
     public override void Interact()
     {
@@ -19,9 +18,24 @@ public class MoveObjects : Interactable
     }
     private void OnMouseDrag()
     {
-        Vector3 f = target - transform.position;
-        f = f.normalized;
-        f *= force;
-        rb.AddForce(f);
+        if (Input.GetAxis("Mouse X") > 0)
+        {
+            rb.AddRelativeForce(Vector3.left * force * 0.02f, ForceMode.Impulse);
+        }
+
+        if (Input.GetAxis("Mouse X") < 0)
+        {
+            rb.AddRelativeForce(Vector3.right * force * 0.02f, ForceMode.Impulse);
+        }
+        
+        if (Input.GetAxis("Mouse Y") > 0)
+        {
+            rb.AddRelativeForce(new Vector3(0,0,-1) * force * 0.02f, ForceMode.Impulse);
+        }
+
+        if (Input.GetAxis("Mouse Y") < 0)
+        {
+            rb.AddRelativeForce(new Vector3(0, 0, 1) * force * 0.02f, ForceMode.Impulse);
+        }
     }
 }

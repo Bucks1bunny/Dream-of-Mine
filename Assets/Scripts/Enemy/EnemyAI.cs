@@ -70,7 +70,7 @@ public class EnemyAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            Player target = player.GetComponent<Player>();
+            PlayerHealthSystem target = player.GetComponent<PlayerHealthSystem>();
             if(target != null)
                 target.TakeDamage(damage);
 
