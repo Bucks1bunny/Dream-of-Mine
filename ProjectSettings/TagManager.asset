@@ -17,7 +17,7 @@ TagManager:
   - UI
   - Ground
   - Walls
-  - Ladder
+  - Light
   - Player
   - Object
   - Post Processing

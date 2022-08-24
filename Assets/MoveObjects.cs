@@ -5,12 +5,17 @@ using UnityEngine;
 public class MoveObjects : Interactable
 {
     Rigidbody rb;
-    private Vector3 target;
+    public Transform massCenter;
+
+    private float mouseUpDown;
+    private float mouseRightLeft;
     public float force;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = massCenter.position;
+        
     }
     public override void Interact()
     {
@@ -18,24 +23,33 @@ public class MoveObjects : Interactable
     }
     private void OnMouseDrag()
     {
-        if (Input.GetAxis("Mouse X") > 0)
+        mouseUpDown = Input.GetAxis("Mouse Y") * 1.5f;
+        mouseRightLeft = Input.GetAxis("Mouse X") * 1.5f;
+
+        Debug.Log("X:"+mouseRightLeft + "\nY:" + mouseUpDown);
+
+        if (mouseRightLeft > 0)
         {
-            rb.AddRelativeForce(Vector3.left * force * 0.02f, ForceMode.Impulse);
+            AddForceToObject(Vector3.right);
         }
 
-        if (Input.GetAxis("Mouse X") < 0)
+        if (mouseRightLeft < 0)
         {
-            rb.AddRelativeForce(Vector3.right * force * 0.02f, ForceMode.Impulse);
+            AddForceToObject(Vector3.left);
         }
         
-        if (Input.GetAxis("Mouse Y") > 0)
+        if (mouseUpDown > 0)
         {
-            rb.AddRelativeForce(new Vector3(0,0,-1) * force * 0.02f, ForceMode.Impulse);
+            AddForceToObject(new Vector3(0, 0, 1));
         }
 
-        if (Input.GetAxis("Mouse Y") < 0)
+        if (mouseUpDown < 0)
         {
-            rb.AddRelativeForce(new Vector3(0, 0, 1) * force * 0.02f, ForceMode.Impulse);
+            AddForceToObject(new Vector3(0, 0, -1));
         }
+    }
+    void AddForceToObject(Vector3 direction)
+    {
+        rb.AddRelativeForce(direction * force * 0.02f, ForceMode.Impulse);
     }
 }

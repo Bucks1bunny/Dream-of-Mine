@@ -14,10 +14,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         cam = Camera.main;
     }
-    private void Update()
-    {
-        Raycast();
-    }
     private void FixedUpdate()
     {
         Raycast();
@@ -53,13 +49,25 @@ public class PlayerInteraction : MonoBehaviour
                     interaction.Interact();
                 }
                 break;
-            case Interactable.InteractionType.Hold:
+            case Interactable.InteractionType.Move:
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     interactHand.enabled = false;
                     interaction.Interact();
                 }
                 holdTimer.fillAmount = interaction.GetHoldTime();
+                break;
+            case Interactable.InteractionType.Hold:
+                if (Input.GetKeyDown(key))
+                {
+                    interaction.IncreaseHoldTime();
+                    if(interaction.GetHoldTime() > 1)
+                    {
+                        interaction.Interact();
+                        interaction.ResetHoldTime();
+                    }
+                }
+                interaction.ResetHoldTime();
                 break;
             default:
                 throw new System.Exception("Not Interactable"); 

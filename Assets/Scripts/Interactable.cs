@@ -4,13 +4,13 @@ public abstract class Interactable : MonoBehaviour
     public enum InteractionType
     {
         Click,
-        Hold
+        Hold,
+        Move
     }
 
     float holdTime;
 
     public InteractionType interactionType;
-   // public abstract void ShowHand();
     public abstract void Interact();
     
     public void IncreaseHoldTime() => holdTime += Time.deltaTime;
