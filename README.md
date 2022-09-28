@@ -1,2 +1,2 @@
 # Dream-of-Mine
-Игра рогалик-рпг
+Gameplay: https://youtu.be/YeXPVg0hOVw
